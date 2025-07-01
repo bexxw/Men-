@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elit Alyans Kafe Menü</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f7f7;
+      color: #333;
+    }
+    header {
+      background: #bfa87f; /* Sıcak, davetkar altın/kahverengi */
+      color: white;
+      text-align: center;
+      padding: 25px;
+      font-size: 1.8em;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+    .menu-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 2x2 düzeni sağlar */
+      gap: 15px;
+      padding: 15px;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+    .menu-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .menu-item:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    .menu-item img {
+      width: 100%;
+      height: 140px; /* Daha iyi görsel için yükseklik arttırıldı */
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+    .menu-item h2 {
+      margin: 0;
+      padding: 12px;
+      font-size: 1.1em;
+      background: #f0f0f0;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #888;
+      margin-top: 30px;
+      border-top: 1px solid #eee;
+    }
+    .page {
+      display: none;
+      padding: 25px;
+      max-width: 700px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .page h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #bfa87f;
+      font-size: 1.8em;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+    .back-btn {
+      display: block;
+      margin: 30px auto 10px;
+      background: #bfa87f;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1.05em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #a3906a;
+    }
+    ul {
+      max-width: 600px;
+      margin: auto;
+      list-style: none; /* Varsayılan liste stilini kaldırır */
+      padding-left: 0; /* Varsayılan dolguyu kaldırır */
+    }
+    li {
+      padding: 12px 0;
+      border-bottom: 1px dashed #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    .item-details {
+      flex-grow: 1;
+    }
+    .item-name {
+      font-weight: bold;
+      color: #555;
+      font-size: 1.1em;
+    }
+    .item-description {
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 5px;
+    }
+    .item-price {
+      font-weight: bold;
+      color: #bfa87f; /* Fiyat aksan renginde */
+      font-size: 1.1em;
+      margin-left: 20px;
+      white-space: nowrap; /* Fiyatın kaymasını engeller */
+    }
+    ul ul {
+      list-style: none; /* İç içe listeler için de kaldırır */
+      padding-left: 15px; /* Alt öğeler için girinti */
+      margin-top: 5px;
+    }
+    ul ul li {
+      padding: 8px 0;
+      border-bottom: none; /* Alt öğeler için kenarlık yok */
+    }
+  </style>
+</head>
+<body>
+
+  <header>Elit Alyans Kafe</header>
+
+  <div id="mainMenu" class="menu-container">
+    <div class="menu-item" onclick="openPage('sicak')">
+      <img src="sicak-icecekler.jpg" alt="Sıcak İçecekler">
+      <h2>Sıcak İçecekler</h2>
+    </div>
+    <div class="menu-item" onclick="openPage('soguk')">
+      <img src="soguk-icecekler.jpg" alt="Soğuk İçecekler">
+      <h2>Soğuk İçecekler</h2>
+    </div>
+    <div class="menu-item" onclick="openPage('atis')">
+      <img src="atistirmaliklar.jpg" alt="Atıştırmalıklar">
+      <h2>Atıştırmalıklar</h2>
+    </div>
+    <div class="menu-item" onclick="openPage('yemek')">
+      <img src="tatlilar.jpg" alt="Tatlılar">
+      <h2>Tatlılar</h2>
+    </div>
+  </div>
+
+  <div id="sicak" class="page">
+    <h2>Sıcak İçecekler</h2>
+    <ul>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Espresso</div>
+          <div class="item-description">Yoğun aromalı, İtalyan usulü sert kahve.</div>
+        </div>
+        <div class="item-price">45 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Americano</div>
+          <div class="item-description">Sıcak su ile inceltilmiş espresso, pürüzsüz bir lezzet.</div>
+        </div>
+        <div class="item-price">50 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Latte</div>
+          <div class="item-description">Espresso, buharda ısıtılmış süt ve hafif süt köpüğü ile.</div>
+        </div>
+        <div class="item-price">60 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Filtre Kahve</div>
+          <div class="item-description">Özenle demlenmiş, dengeli ve aromatik filtre kahve.</div>
+        </div>
+        <div class="item-price">55 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Nescafe</div>
+        </div>
+        <div class="item-price">40 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Siyah Çay</div>
+          <div class="item-description">Geleneksel demleme siyah çay, günün her saatine uygun.</div>
+        </div>
+        <div class="item-price">35 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Bitki Çayları</div>
+          <div class="item-description">Papatya, nane, rooibos, hibiskus vb. Seçenekler için sorun.</div>
+        </div>
+        <div class="item-price">45 TL</div>
+      </li>
+    </ul>
+    <button class="back-btn" onclick="goBack()">Geri</button>
+  </div>
+
+  <div id="soguk" class="page">
+    <h2>Soğuk İçecekler</h2>
+    <ul>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Cold Brew</div>
+          <div class="item-description">Uzun süre soğuk demlenmiş, asit oranı düşük, pürüzsüz kahve.</div>
+        </div>
+        <div class="item-price">65 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Cold Brew Latte</div>
+          <div class="item-description">Soğuk demlenmiş kahve ve süt ile hazırlanan ferahlatıcı lezzet.</div>
+        </div>
+        <div class="item-price">70 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Maden Suyu</div>
+        </div>
+        <div class="item-price">25 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Gazlı İçecekler</div>
+        </div>
+        <div class="item-price"></div>
+        <ul>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Limonlu İçecek</div>
+            </div>
+            <div class="item-price">30 TL</div>
+          </li>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Çamlıca</div>
+            </div>
+            <div class="item-price">30 TL</div>
+          </li>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Sprite</div>
+            </div>
+            <div class="item-price">35 TL</div>
+          </li>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Kola</div>
+            </div>
+            <div class="item-price">35 TL</div>
+          </li>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Fanta</div>
+            </div>
+            <div class="item-price">35 TL</div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Meyve Suyu</div>
+        </div>
+        <div class="item-price">40 TL</div>
+      </li>
+    </ul>
+    <button class="back-btn" onclick="goBack()">Geri</button>
+  </div>
+
+  <div id="atis" class="page">
+    <h2>Atıştırmalıklar</h2>
+    <ul>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Gözleme</div>
+        </div>
+        <div class="item-price">80 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Çi Börek</div>
+        </div>
+        <div class="item-price">90 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Tostlar</div>
+        </div>
+        <div class="item-price"></div>
+        <ul>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Kaşarlı Tost</div>
+            </div>
+            <div class="item-price">75 TL</div>
+          </li>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Sucuklu Tost</div>
+            </div>
+            <div class="item-price">75 TL</div>
+          </li>
+          <li>
+            <div class="item-details">
+              <div class="item-name">Üç Peynirli Tost</div>
+            </div>
+            <div class="item-price">80 TL</div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Sandviçler</div>
+        </div>
+        <div class="item-price">85 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Hamburger & Patates Kızartması</div>
+        </div>
+        <div class="item-price">150 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Meyveli Yoğurt</div>
+        </div>
+        <div class="item-price">60 TL</div>
+      </li>
+    </ul>
+    <button class="back-btn" onclick="goBack()">Geri</button>
+  </div>
+
+  <div id="yemek" class="page">
+    <h2>Tatlılar</h2>
+    <ul>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Trileçe</div>
+        </div>
+        <div class="item-price">95 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Magnolia</div>
+        </div>
+        <div class="item-price">100 TL</div>
+      </li>
+      <li>
+        <div class="item-details">
+          <div class="item-name">Profiterol</div>
+        </div>
+        <div class="item-price">90 TL</div>
+      </li>
+    </ul>
+    <button class="back-btn" onclick="goBack()">Geri</button>
+  </div>
+
+  <footer>© 2025 Elit Alyans Kafe</footer>
+
+  <script>
+    function openPage(pageId) {
+      document.getElementById('mainMenu').style.display = 'none';
+      document.getElementById(pageId).style.display = 'block';
+    }
+    function goBack() {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.style.display = 'none');
+      document.getElementById('mainMenu').style.display = 'grid';
+    }
+  </script>
+
+</body>
+</html>
